@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SafePay Checkout</title>
+    <script src="https://getsafepay.pk/checkout.js"></script>
+</head>
+<body>
+    <div id="safepay-button"></div>
+    <script>
+        // Get parameters from URL
+        const params = new URLSearchParams(window.location.search);
+        const amount = params.get('amount');
+        const orderId = params.get('orderId');
+        const successUrl = params.get('successUrl');
+        const cancelUrl = params.get('cancelUrl');
+
+        // Initialize SafePay
+        const safepay = new Safepay({
+            environment: 'sandbox',
+            token: 'sec_2d29dea2-f814-4a20-a971-ae0d454e9d07'
+        });
+
+        // Create checkout
+        safepay.checkout({
+            amount: amount,
+            currency: 'PKR',
+            orderId: orderId,
+            cancelUrl: decodeURIComponent(cancelUrl),
+            successUrl: decodeURIComponent(successUrl)
+        });
+    </script>
+</body>
+</html>
